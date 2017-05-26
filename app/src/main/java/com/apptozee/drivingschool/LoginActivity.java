@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,8 +24,7 @@ public class LoginActivity extends AppCompatActivity{
     // UI references.
     private EditText mPasswordView, mUsername;
     private Button mEmailSignInButton;
-
-
+    private TextView mForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,21 @@ public class LoginActivity extends AppCompatActivity{
         mUsername = (EditText)findViewById(R.id.userField);
         mPasswordView = (EditText) findViewById(R.id.passField);
         mEmailSignInButton = (Button) findViewById(R.id.loginButton);
+        mForgotPassword = (TextView) findViewById(R.id.forgotpasswordfield);
 
         // Button LogIn Click Listener.
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
+            }
+        });
+
+        //Forgot Password listener
+        mForgotPassword.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
