@@ -48,10 +48,7 @@ public class viaSMS extends AppCompatActivity {
                             .setAction(getResources().getString(R.string.signin), new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent i = new Intent(viaSMS.this,LoginActivity.class);
-                                    startActivity(i);
-
-                                    viaSMS.this.finish(); // Don't come back to this activity on back press
+                                    onBackPressed(); // Don't come back to this activity on back press
                                 }
                             });
                     snackbar.show();
@@ -66,5 +63,13 @@ public class viaSMS extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    // If user presses back, we don't want to exit but to go back to LoginActivity
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(viaSMS.this,LoginActivity.class);
+        startActivity(i);
+        viaSMS.this.finish();
     }
 }

@@ -48,10 +48,7 @@ public class viaEmail extends AppCompatActivity {
                             .setAction(getResources().getString(R.string.signin), new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent i = new Intent(viaEmail.this,LoginActivity.class);
-                                    startActivity(i);
-
-                                    viaEmail.this.finish(); // Don't come back to this activity on back press
+                                    onBackPressed(); // Don't come back to this activity on back press
                                 }
                             });
                     snackbar.show();
@@ -73,5 +70,13 @@ public class viaEmail extends AppCompatActivity {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    // If user presses back, we don't want to exit but to go back to LoginActivity
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(viaEmail.this,LoginActivity.class);
+        startActivity(i);
+        viaEmail.this.finish();
     }
 }
