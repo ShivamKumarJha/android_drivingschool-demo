@@ -26,11 +26,19 @@ public class LoginActivity extends AppCompatActivity{
     private EditText mPasswordView, mUsername;
     private Button mEmailSignInButton;
     private TextView mForgotPassword;
+    private AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //Decide AlertDialog design based on Android Version.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(LoginActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(LoginActivity.this);
+        }
 
         // Set up the login form components.
         mUsername = (EditText)findViewById(R.id.userField);
@@ -50,14 +58,6 @@ public class LoginActivity extends AppCompatActivity{
         mForgotPassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder;
-
-                //Decide design based on Android Version.
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    builder = new AlertDialog.Builder(LoginActivity.this, android.R.style.Theme_Material_Dialog_Alert);
-                } else {
-                    builder = new AlertDialog.Builder(LoginActivity.this);
-                }
 
                 builder.setTitle(getResources().getString(R.string.forgot))
                         .setMessage("Retrieve password via")
@@ -133,5 +133,22 @@ public class LoginActivity extends AppCompatActivity{
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    @Override
+    public void onBackPressed() {
+        builder.setTitle(getResources().getString(R.string.forgot))
+                .setMessage("Exit?")
+                .setIcon(android.R.drawable.stat_sys_warning)
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close application
+                        LoginActivity.this.finish();
+                        System.exit(0);
+                    }
+                })
+                .show();
+
     }
 }
