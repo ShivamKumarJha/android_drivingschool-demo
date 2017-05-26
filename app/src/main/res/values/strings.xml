@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Driving School</string>
+    <string name="vendor">AppToZee</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -18,8 +19,13 @@
     <string name="submit">Sumbit</string>
     <string name="title_activity_driver">Driver</string>
 
+    <!--Drawer String -->
+    <string name="register">Register Customer</string>
+    <string name="schedule">Schedule</string>
+    <string name="applyleave">Apply for leave</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="logout">LOGOUT</string>
+    <string name="exit">Exit</string>
 </resources>
