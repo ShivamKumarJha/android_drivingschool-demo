@@ -139,8 +139,8 @@ public class LoginActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        builder.setTitle(getResources().getString(R.string.forgot))
-                .setMessage("Exit?")
+        builder.setTitle("Exit?")
+                .setMessage("Are you sure you want to exit?")
                 .setIcon(android.R.drawable.stat_sys_warning)
                 .setNegativeButton("No", null)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
