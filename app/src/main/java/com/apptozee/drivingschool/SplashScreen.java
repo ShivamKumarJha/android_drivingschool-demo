@@ -28,4 +28,8 @@ public class SplashScreen extends AppCompatActivity {
         };
         timerThread.start();
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }
