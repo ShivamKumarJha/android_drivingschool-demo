@@ -1,0 +1,18 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@android:color/background_dark"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:textSize="45sp"
+        android:textColor="@android:color/holo_green_light"
+        android:text="This is Splash Screen!"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
