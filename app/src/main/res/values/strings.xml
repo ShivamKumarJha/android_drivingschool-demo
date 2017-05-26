@@ -6,9 +6,14 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="signin">Sign in</string>
+    <string name="error_invalid_email">This Email is invalid</string>
+    <string name="error_invalid_mobile_number">This Mobile number is invalid</string>
     <string name="error_invalid_username">This username is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="forgot">Forgot Password?</string>
+    <string name="email">Enter Email</string>
+    <string name="mobile_number">Enter Mobile Number</string>
+    <string name="submit">Sumbit</string>
 </resources>

@@ -1,23 +1,24 @@
 package com.apptozee.drivingschool;
 
-import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import com.apptozee.drivingschool.ForgotPassword.viaEmail;
+import com.apptozee.drivingschool.ForgotPassword.viaSMS;
+
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via username & password.
  */
 public class LoginActivity extends AppCompatActivity{
 
@@ -49,7 +50,32 @@ public class LoginActivity extends AppCompatActivity{
         mForgotPassword.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder;
 
+                //Decide design based on Android Version.
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(LoginActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(LoginActivity.this);
+                }
+
+                builder.setTitle(getResources().getString(R.string.forgot))
+                        .setMessage("Retrieve password via")
+                        .setPositiveButton("EMAIL", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // call viaEmail activity
+                                Intent i = new Intent (LoginActivity.this,viaEmail.class);
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton("SMS", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // call viaSMS activity
+                                Intent i = new Intent (LoginActivity.this,viaSMS.class);
+                                startActivity(i);
+                            }
+                        })
+                        .show();
             }
         });
     }
