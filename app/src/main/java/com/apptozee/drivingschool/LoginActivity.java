@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity{
                                 // call viaEmail activity
                                 Intent i = new Intent (LoginActivity.this,viaEmail.class);
                                 startActivity(i);
+                                LoginActivity.this.finish();
                             }
                         })
                         .setNegativeButton("SMS", new DialogInterface.OnClickListener() {
@@ -73,6 +74,7 @@ public class LoginActivity extends AppCompatActivity{
                                 // call viaSMS activity
                                 Intent i = new Intent (LoginActivity.this,viaSMS.class);
                                 startActivity(i);
+                                LoginActivity.this.finish();
                             }
                         })
                         .show();
