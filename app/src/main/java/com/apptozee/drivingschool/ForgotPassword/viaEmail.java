@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -26,10 +27,13 @@ public class viaEmail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_via_email);
+        setContentView(R.layout.activity_forgot_password);
 
-        e = (EditText)findViewById(R.id.email);
+        e = (EditText)findViewById(R.id.field);
         b = (Button) findViewById(R.id.sumbit);
+
+        e.setHint(getString(R.string.email));
+        e.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override

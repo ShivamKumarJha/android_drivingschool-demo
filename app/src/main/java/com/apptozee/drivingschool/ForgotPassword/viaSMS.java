@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,10 +24,13 @@ public class viaSMS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_via_sms);
+        setContentView(R.layout.activity_forgot_password);
 
-        e = (EditText)findViewById(R.id.mobile_number);
+        e = (EditText)findViewById(R.id.field);
         b = (Button) findViewById(R.id.sumbit);
+
+        e.setHint(getString(R.string.mobile_number));
+        e.setInputType(InputType.TYPE_CLASS_PHONE);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
