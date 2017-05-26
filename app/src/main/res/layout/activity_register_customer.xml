@@ -1,0 +1,83 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/login_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditText
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:gravity="center"
+        android:id="@+id/name"
+        android:background="@drawable/login_fields"
+        android:padding="10.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:hint="Name"
+        android:ems="10" />
+
+    <EditText
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:gravity="center"
+        android:id="@+id/pickup"
+        android:background="@drawable/login_fields"
+        android:padding="10.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="40.0dip"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="Pickup"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:gravity="center"
+        android:id="@+id/days"
+        android:background="@drawable/login_fields"
+        android:padding="10.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="Days"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:gravity="center"
+        android:id="@+id/slot"
+        android:background="@drawable/login_fields"
+        android:padding="10.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="Time slot"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:id="@+id/register"
+        android:background="@drawable/login_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:text="REGISTER" />
+
+</LinearLayout>

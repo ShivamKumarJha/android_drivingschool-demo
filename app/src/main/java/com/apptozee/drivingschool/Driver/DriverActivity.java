@@ -1,5 +1,6 @@
 package com.apptozee.drivingschool.Driver;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -57,7 +58,10 @@ public class DriverActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            //Close the activity
+            //Write additional DB code later.
+            DriverActivity.this.finish();
             return true;
         }
 
@@ -70,19 +74,17 @@ public class DriverActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        /*if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.reg) {
+            // Call RegisterCustomer activity
+            Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
+            startActivity(i);
+        } else if (id == R.id.sched) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.leave) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.exit_drawer) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } */
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
