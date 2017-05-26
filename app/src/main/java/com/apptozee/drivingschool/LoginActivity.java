@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.apptozee.drivingschool.Driver.DriverActivity;
 import com.apptozee.drivingschool.ForgotPassword.viaEmail;
 import com.apptozee.drivingschool.ForgotPassword.viaSMS;
 
@@ -112,7 +113,7 @@ public class LoginActivity extends AppCompatActivity{
             mUsername.setError(getString(R.string.error_field_required));
             focusView = mUsername;
             cancel = true;
-        } else if (!isUserValid(uname)) {
+        } else if (uname.length()!=10) {
             mUsername.setError(getString(R.string.error_invalid_username));
             focusView = mUsername;
             cancel = true;
@@ -124,12 +125,9 @@ public class LoginActivity extends AppCompatActivity{
             focusView.requestFocus();
         } else {
             /*Start new activiy*/
+            Intent i = new Intent(LoginActivity.this, DriverActivity.class);
+            startActivity(i);
         }
-    }
-
-    private boolean isUserValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {

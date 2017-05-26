@@ -23,19 +23,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
-
         <activity
             android:name=".ForgotPassword.viaEmail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity
+            android:name=".ForgotPassword.viaSMS"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"></activity>
-
-        <activity android:name=".ForgotPassword.viaSMS"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
-        </activity>
+        <activity
+            android:name=".Driver.DriverActivity"
+            android:label="@string/title_activity_driver"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
