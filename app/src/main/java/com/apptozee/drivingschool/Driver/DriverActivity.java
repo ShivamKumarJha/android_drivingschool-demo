@@ -81,7 +81,8 @@ public class DriverActivity extends AppCompatActivity
         } else if (id == R.id.sched) {
 
         } else if (id == R.id.leave) {
-
+            Intent i = new Intent(DriverActivity.this,DriverLeave.class);
+            startActivity(i);
         } else if (id == R.id.exit_drawer) {
 
         }
