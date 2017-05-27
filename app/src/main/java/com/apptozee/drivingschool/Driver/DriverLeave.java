@@ -1,21 +1,15 @@
 package com.apptozee.drivingschool.Driver;
 
-import android.app.DatePickerDialog;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.apptozee.drivingschool.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class DriverLeave extends AppCompatActivity {
 
