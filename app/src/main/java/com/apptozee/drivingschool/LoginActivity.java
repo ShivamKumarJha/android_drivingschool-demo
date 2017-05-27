@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity{
             focusView = mUsername;
             cancel = true;
         } else if (uname.length()!=10) {
-            mUsername.setError(getString(R.string.error_invalid_username));
+            mUsername.setError(getString(R.string.error_invalid_mobile_number));
             focusView = mUsername;
             cancel = true;
         }
