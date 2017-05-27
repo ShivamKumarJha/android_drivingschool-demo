@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.apptozee.drivingschool.LoginActivity;
 import com.apptozee.drivingschool.R;
 
 public class DriverActivity extends AppCompatActivity

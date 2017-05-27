@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity{
             /*Start new activiy*/
             Intent i = new Intent(LoginActivity.this, DriverActivity.class);
             startActivity(i);
+            LoginActivity.this.finish();
         }
     }
 
