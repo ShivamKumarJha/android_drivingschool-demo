@@ -63,6 +63,8 @@ public class DriverActivity extends AppCompatActivity
         if (id == R.id.logout) {
             //Close the activity
             //Write additional DB code later.
+            Intent i = new Intent(DriverActivity.this,LoginActivity.class);
+            startActivity(i);
             DriverActivity.this.finish();
             return true;
         }
