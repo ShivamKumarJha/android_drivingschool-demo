@@ -2,6 +2,7 @@ package com.apptozee.drivingschool.Driver;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -79,12 +80,14 @@ public class DriverActivity extends AppCompatActivity
             Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
             startActivity(i);
         } else if (id == R.id.sched) {
-
+            //This will be the default page when drawer opens
+            //code will be written later, probably ListView component
         } else if (id == R.id.leave) {
             Intent i = new Intent(DriverActivity.this,DriverLeave.class);
             startActivity(i);
         } else if (id == R.id.exit_drawer) {
-
+            DriverActivity.this.finish();
+            System.exit(0);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
