@@ -4,195 +4,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/login_bg"
     android:padding="15dp">
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Customer_Name"
-        android:textSize="24sp" />
-
-    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/cname"
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:background="@drawable/login_fields"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="12dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:padding="10.0dip"
+        android:text="@string/customer_name"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hours Left"
-            android:textSize="24sp" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="157dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="X" />
-    </LinearLayout>
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/hrsleft"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName"
+        android:padding="10.0dip"
+        android:background="@drawable/login_fields"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginRight="40.0dip"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:textSize="20sp"
+        android:hint="@string/hrs_left" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Amount"
-            android:textSize="24sp" />
-
-        <EditText
-            android:id="@+id/editText3"
-            android:layout_width="155dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:text="$" />
-    </LinearLayout>
+    <EditText
+        android:id="@+id/money"
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:background="@drawable/login_fields"
+        android:gravity="center"
+        android:padding="10.0dip"
+        android:textSize="20sp"
+        android:inputType="textPersonName"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:hint="@string/amount" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:gravity="center"
+        android:id="@+id/hrs_over"
+        android:textColor="#ffffffff"
+        android:textColorHint="#ffffffff"
+        android:background="@drawable/login_fields"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="22sp"
-        tools:text="Hours done :" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
-        android:visibility="visible">
-
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:text="1" />
-
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkBox1"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/checkBox1"
-            android:layout_toRightOf="@+id/checkBox1"
-            android:text="2" />
-
-        <CheckBox
-            android:id="@+id/checkBox3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/checkBox2"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/checkBox2"
-            android:layout_toRightOf="@+id/checkBox2"
-            android:text="3" />
-
-        <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/checkBox3"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/checkBox3"
-            android:layout_toRightOf="@+id/checkBox3"
-            android:text="4" />
-
-        <CheckBox
-            android:id="@+id/checkBox5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/checkBox4"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toRightOf="@+id/checkBox4"
-            android:text="5"
-            android:textSize="18sp" />
-
-        <CheckBox
-            android:id="@+id/checkBox6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="60dp"
-            android:text="6" />
-
-        <CheckBox
-            android:id="@+id/checkBox7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkBox6"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/checkBox6"
-            android:layout_toRightOf="@+id/checkBox6"
-            android:text="7" />
-
-        <CheckBox
-            android:id="@+id/checkBox8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkBox7"
-            android:layout_alignEnd="@+id/checkBox3"
-            android:layout_alignRight="@+id/checkBox3"
-            android:layout_alignTop="@+id/checkBox7"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toRightOf="@+id/checkBox7"
-            android:text="8" />
-
-        <CheckBox
-            android:id="@+id/checkBox9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkBox8"
-            android:layout_alignTop="@+id/checkBox8"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@+id/checkBox8"
-            android:layout_toRightOf="@+id/checkBox8"
-            android:text="9" />
-
-        <CheckBox
-            android:id="@+id/checkBox10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/checkBox9"
-            android:layout_alignTop="@+id/checkBox9"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_toRightOf="@+id/checkBox9"
-            android:text="10"
-            android:textSize="18sp" />
-
-    </RelativeLayout>
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="40.0dip"
+        android:layout_marginRight="40.0dip"
+        android:padding="10.0dip"
+        android:text="@string/hrs_done"
+        android:textSize="20sp" />
 
 </LinearLayout>

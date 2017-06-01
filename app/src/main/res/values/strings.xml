@@ -32,4 +32,10 @@
     <string name="lend">Leave ends</string>
     <string name="lreason">Leave reason</string>
     <string name="apply">Apply</string>
+
+    <!--CUSTOMER -->
+    <string name="customer_name">Customer_Name</string>
+    <string name="hrs_left">Hours left</string>
+    <string name="hrs_done">Hours done</string>
+    <string name="amount">Amount paid</string>
 </resources>
