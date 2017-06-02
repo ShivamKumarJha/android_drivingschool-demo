@@ -1,11 +1,14 @@
 package com.apptozee.drivingschool.Driver;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,6 +25,7 @@ public class DriverActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //UI references
+    private AlertDialog.Builder builder;
     private ListView l;
     //Demo string. This needs to be fetched from database.
     String[] customerlist = {"Customer 1","Customer 2","Customer 3","Customer 4",
@@ -43,6 +47,12 @@ public class DriverActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Decide AlertDialog design based on Android Version.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(DriverActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(DriverActivity.this);
+        }
 
         //Set up customer list view
         l = (ListView) findViewById(R.id.customer_list);
@@ -64,7 +74,18 @@ public class DriverActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            builder.setTitle("Exit?")
+                    .setMessage("Are you sure you want to exit?")
+                    .setIcon(android.R.drawable.stat_sys_warning)
+                    .setNegativeButton("No", null)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // close application
+                            DriverActivity.this.finish();
+                            System.exit(0);
+                        }
+                    })
+                    .show();
         }
     }
 
