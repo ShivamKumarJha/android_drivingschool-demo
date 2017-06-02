@@ -10,12 +10,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.apptozee.drivingschool.LoginActivity;
 import com.apptozee.drivingschool.R;
 
 public class DriverActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //UI references
+    private ListView l;
+    //Demo string. This needs to be fetched from database.
+    String[] customerlist = {"Customer 1","Customer 2","Customer 3","Customer 4",
+            "Customer 5","Customer 6","Customer 7","Customer 8"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,20 @@ public class DriverActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        //Set up customer list view
+        l = (ListView) findViewById(R.id.customer_list);
+        ArrayAdapter adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, customerlist); //we will use own layout once ready
+        l.setAdapter(adapter);
+        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(DriverActivity.this,CustomerDetails.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override

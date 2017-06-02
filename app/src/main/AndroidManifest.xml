@@ -42,6 +42,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".Driver.DriverLeave"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
+        <activity android:name=".Driver.CustomerDetails" />
     </application>
 
 </manifest>
