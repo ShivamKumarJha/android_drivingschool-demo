@@ -22,6 +22,7 @@ import android.widget.ListView;
 import com.apptozee.drivingschool.LoginActivity;
 import com.apptozee.drivingschool.R;
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class DriverActivity extends AppCompatActivity {
@@ -40,24 +41,43 @@ public class DriverActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //BottomBar code start
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
-            public void onTabSelected(@IdRes int id) {
-                if (id == R.id.sched) {
+            public void onTabSelected(@IdRes int tabId) {
+                if (tabId == R.id.sched) {
                     //This will be the default page when drawer opens
                     //code will be written later, probably ListView component
                 }
-                else if (id == R.id.reg) {
+                else if (tabId == R.id.reg) {
                     // Call RegisterCustomer activity
                     Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
                     startActivity(i);
-                } else if (id == R.id.leave) {
+                } else if (tabId == R.id.leave) {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
                     startActivity(i);
                 }
             }
         });
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                if (tabId == R.id.sched) {
+                    //This will be the default page when drawer opens
+                    //code will be written later, probably ListView component
+                }
+                else if (tabId == R.id.reg) {
+                    // Call RegisterCustomer activity
+                    Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
+                    startActivity(i);
+                } else if (tabId == R.id.leave) {
+                    Intent i = new Intent(DriverActivity.this,DriverLeave.class);
+                    startActivity(i);
+                }
+            }
+        });
+        //BottomBar code end
 
         //Decide AlertDialog design based on Android Version.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
