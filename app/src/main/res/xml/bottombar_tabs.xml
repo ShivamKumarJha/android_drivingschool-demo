@@ -1,0 +1,14 @@
+<tabs>
+    <tab
+        id="@+id/sched"
+        icon="@android:drawable/ic_menu_view"
+        title="@string/schedule" />
+    <tab
+        id="@+id/reg"
+        icon="@android:drawable/ic_input_add"
+        title="@string/register" />
+    <tab
+        id="@+id/leave"
+        icon="@android:drawable/sym_action_email"
+        title="@string/applyleave" />
+</tabs>

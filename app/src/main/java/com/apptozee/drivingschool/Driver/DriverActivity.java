@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,9 +21,10 @@ import android.widget.ListView;
 
 import com.apptozee.drivingschool.LoginActivity;
 import com.apptozee.drivingschool.R;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
-public class DriverActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class DriverActivity extends AppCompatActivity {
 
     //UI references
     private AlertDialog.Builder builder;
@@ -38,14 +40,24 @@ public class DriverActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int id) {
+                if (id == R.id.sched) {
+                    //This will be the default page when drawer opens
+                    //code will be written later, probably ListView component
+                }
+                else if (id == R.id.reg) {
+                    // Call RegisterCustomer activity
+                    Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
+                    startActivity(i);
+                } else if (id == R.id.leave) {
+                    Intent i = new Intent(DriverActivity.this,DriverLeave.class);
+                    startActivity(i);
+                }
+            }
+        });
 
         //Decide AlertDialog design based on Android Version.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -70,23 +82,18 @@ public class DriverActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            builder.setTitle("Exit?")
-                    .setMessage("Are you sure you want to exit?")
-                    .setIcon(android.R.drawable.stat_sys_warning)
-                    .setNegativeButton("No", null)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // close application
-                            DriverActivity.this.finish();
-                            System.exit(0);
-                        }
-                    })
-                    .show();
-        }
+        builder.setTitle("Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setIcon(android.R.drawable.stat_sys_warning)
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // close application
+                        DriverActivity.this.finish();
+                        System.exit(0);
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -114,31 +121,5 @@ public class DriverActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.reg) {
-            // Call RegisterCustomer activity
-            Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
-            startActivity(i);
-        } else if (id == R.id.sched) {
-            //This will be the default page when drawer opens
-            //code will be written later, probably ListView component
-        } else if (id == R.id.leave) {
-            Intent i = new Intent(DriverActivity.this,DriverLeave.class);
-            startActivity(i);
-        } else if (id == R.id.exit_drawer) {
-            DriverActivity.this.finish();
-            System.exit(0);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
