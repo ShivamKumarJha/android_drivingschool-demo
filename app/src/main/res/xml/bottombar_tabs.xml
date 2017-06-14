@@ -2,13 +2,16 @@
     <tab
         id="@+id/sched"
         icon="@android:drawable/ic_menu_view"
-        title="@string/schedule" />
+        title="@string/schedule"
+        barColorWhenSelected="#9fc4f5" />
     <tab
         id="@+id/reg"
         icon="@android:drawable/ic_input_add"
-        title="@string/register" />
+        title="@string/register"
+        barColorWhenSelected="#a5f992" />
     <tab
         id="@+id/leave"
         icon="@android:drawable/sym_action_email"
-        title="@string/applyleave" />
+        title="@string/applyleave"
+        barColorWhenSelected="#c1a0f7" />
 </tabs>

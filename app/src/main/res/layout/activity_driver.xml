@@ -13,7 +13,9 @@
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+        app:bb_tabXmlResource="@xml/bottombar_tabs"
+        app:bb_inActiveTabColor="#222222"
+        app:bb_activeTabColor="@color/colorPrimary"
+        app:bb_showShadow="true"/>
 
 </LinearLayout>
