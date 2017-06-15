@@ -32,30 +32,15 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/lstart"
+        android:id="@+id/lperiod"
         android:padding="10.0dp"
         android:gravity="center"
-        android:hint="@string/lstart"
+        android:hint="@string/lperiod"
         android:inputType="date"
         android:textColor="#ffffffff"
         android:textColorHint="#ffffffff"
         android:background="@drawable/login_fields"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/lend"
-        android:padding="10.0dp"
-        android:gravity="center"
-        android:hint="@string/lend"
-        android:inputType="date"
-        android:textColor="#ffffffff"
-        android:textColorHint="#ffffffff"
-        android:background="@drawable/login_fields"
-        android:layout_marginTop="16dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"

@@ -28,8 +28,7 @@
     <string name="exit">Exit</string>
     <string name="ltake">Leaves taken</string>
     <string name="lleft">Leaves left</string>
-    <string name="lstart">Leave starts</string>
-    <string name="lend">Leave ends</string>
+    <string name="lperiod">Leave period</string>
     <string name="lreason">Leave reason</string>
     <string name="apply">Apply</string>
 
