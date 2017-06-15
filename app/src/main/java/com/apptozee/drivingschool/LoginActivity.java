@@ -90,7 +90,6 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
         });
     }
 
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -131,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
             // form field with an error.
             focusView.requestFocus();
         } else {
-            //Hide Keyboard so Snackbar is visible
+            //Hide Keyboard
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
@@ -186,7 +185,7 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
 
     @Override
     public void onProgressChange(int current, int max) {
-        if(current == max) {
+        if (current == max) {
             //progress finished
         }
     }
