@@ -1,5 +1,6 @@
 package com.apptozee.drivingschool;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,17 +19,20 @@ import com.apptozee.drivingschool.Driver.DriverActivity;
 import com.apptozee.drivingschool.ForgotPassword.viaEmail;
 import com.apptozee.drivingschool.ForgotPassword.viaSMS;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.daimajia.numberprogressbar.OnProgressBarListener;
 
 /**
  * A login screen that offers login via username & password.
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity implements OnProgressBarListener {
 
     // UI references.
     private EditText mPasswordView, mUsername;
     private Button mEmailSignInButton;
     private TextView mForgotPassword;
     private AlertDialog.Builder builder;
+    private NumberProgressBar bnp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +51,14 @@ public class LoginActivity extends AppCompatActivity{
         mPasswordView = (EditText) findViewById(R.id.passField);
         mEmailSignInButton = (Button) findViewById(R.id.loginButton);
         mForgotPassword = (TextView) findViewById(R.id.forgotpasswordfield);
+        bnp = (NumberProgressBar)findViewById(R.id.pbar);
+        bnp.setVisibility(View.GONE); //hide progress bar initially
 
         // Button LogIn Click Listener.
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                attemptLogin(view);
             }
         });
 
@@ -89,7 +96,7 @@ public class LoginActivity extends AppCompatActivity{
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    private void attemptLogin(View v) {
         // Reset errors.
         mUsername.setError(null);
         mPasswordView.setError(null);
@@ -124,10 +131,35 @@ public class LoginActivity extends AppCompatActivity{
             // form field with an error.
             focusView.requestFocus();
         } else {
-            /*Start new activiy*/
-            Intent i = new Intent(LoginActivity.this, DriverActivity.class);
-            startActivity(i);
-            LoginActivity.this.finish();
+            //Hide Keyboard so Snackbar is visible
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+            //disable login fields
+            mPasswordView.setFocusable(false);
+            mUsername.setFocusable(false);
+
+            //show progress bar
+            bnp.setVisibility(View.VISIBLE);
+            bnp.setProgress(0);
+
+            //Using Thread to show progressbar for demo.
+            Thread timerThread = new Thread() {
+                public void run() {
+                    try {
+                        bnp.incrementProgressBy(50);
+                        sleep(2000); // 2000 means 2 second.
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        /*Start new activity */
+                        Intent i = new Intent(LoginActivity.this, DriverActivity.class);
+                        startActivity(i);
+                        LoginActivity.this.finish();
+                    }
+                }
+            };
+            timerThread.start();
         }
     }
 
@@ -150,5 +182,12 @@ public class LoginActivity extends AppCompatActivity{
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void onProgressChange(int current, int max) {
+        if(current == max) {
+            //progress finished
+        }
     }
 }
