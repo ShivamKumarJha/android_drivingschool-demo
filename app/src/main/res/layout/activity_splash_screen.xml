@@ -1,18 +1,26 @@
-<LinearLayout
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@android:color/background_dark"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:textSize="45sp"
-        android:textColor="@android:color/holo_green_light"
-        android:text="This is Splash Screen!"
-        android:textStyle="bold|italic"
-        android:gravity="center"
+    <ImageView
+        android:id="@+id/splashscreen"
+
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="0dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ss1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,RtlHardcoded" />
 
 </LinearLayout>
