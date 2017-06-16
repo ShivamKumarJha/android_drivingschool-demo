@@ -48,6 +48,7 @@ public class DriverLeave extends AppCompatActivity implements DatePickerDialog.O
         e1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                e1.setError(null);
                 dpd.show(getFragmentManager(), "Datepickerdialog");
             }
         });
@@ -80,8 +81,8 @@ public class DriverLeave extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        String datestart = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
-        String dateend = dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd;
-        e1.setText(datestart+" to "+dateend);
+        //String datestart = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
+        //String dateend = dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd;
+        e1.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year+" to "+dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd);
     }
 }
