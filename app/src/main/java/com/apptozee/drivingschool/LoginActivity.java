@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -140,25 +141,20 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
 
             //show progress bar
             bnp.setVisibility(View.VISIBLE);
-            bnp.setProgress(0);
 
-            //Using Thread to show progressbar for demo.
-            Thread timerThread = new Thread() {
+            //progress bar demo for now
+            bnp.setProgress(50);
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
                 public void run() {
-                    try {
-                        bnp.incrementProgressBy(50);
-                        sleep(2000); // 2000 means 2 second.
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } finally {
-                        /*Start new activity */
-                        Intent i = new Intent(LoginActivity.this, DriverActivity.class);
-                        startActivity(i);
-                        LoginActivity.this.finish();
-                    }
+                    bnp.incrementProgressBy(50);
+                    /*Start new activity */
+                    Intent i = new Intent(LoginActivity.this, DriverActivity.class);
+                    startActivity(i);
+                    LoginActivity.this.finish();
                 }
-            };
-            timerThread.start();
+            }, 600);
         }
     }
 
