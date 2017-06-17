@@ -3,8 +3,11 @@ package com.apptozee.drivingschool;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.apptozee.drivingschool.Driver.DriverActivity;
@@ -34,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
     private TextView mForgotPassword;
     private AlertDialog.Builder builder;
     private NumberProgressBar bnp;
+    private LinearLayout ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
         }
 
         // Set up the login form components.
+        ll = (LinearLayout) findViewById(R.id.loginlayout);
         mUsername = (EditText)findViewById(R.id.userField);
         mPasswordView = (EditText) findViewById(R.id.passField);
         mEmailSignInButton = (Button) findViewById(R.id.loginButton);
@@ -89,6 +95,14 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
                         .show();
             }
         });
+    }
+
+    //Method to detect Internet availability
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
     /**
@@ -135,26 +149,33 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-            //disable login fields
-            mPasswordView.setFocusable(false);
-            mUsername.setFocusable(false);
+            if (!isNetworkAvailable()) {
+                //Snackbar to let user know internet is unavailable
+                Snackbar snackbar = Snackbar
+                        .make(ll, "No Internet connection.", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            } else {
+                //disable login fields
+                mPasswordView.setFocusable(false);
+                mUsername.setFocusable(false);
 
-            //show progress bar
-            bnp.setVisibility(View.VISIBLE);
+                //show progress bar
+                bnp.setVisibility(View.VISIBLE);
 
-            //progress bar demo for now
-            bnp.setProgress(50);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    bnp.incrementProgressBy(50);
+                //progress bar demo for now
+                bnp.setProgress(50);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        bnp.incrementProgressBy(50);
                     /*Start new activity */
-                    Intent i = new Intent(LoginActivity.this, DriverActivity.class);
-                    startActivity(i);
-                    LoginActivity.this.finish();
-                }
-            }, 600);
+                        Intent i = new Intent(LoginActivity.this, DriverActivity.class);
+                        startActivity(i);
+                        LoginActivity.this.finish();
+                    }
+                }, 600);
+            }
         }
     }
 
