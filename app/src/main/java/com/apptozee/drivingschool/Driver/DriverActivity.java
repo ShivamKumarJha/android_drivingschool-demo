@@ -11,13 +11,15 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.Toast;
 
 import com.apptozee.drivingschool.LoginActivity;
 import com.apptozee.drivingschool.R;
@@ -25,11 +27,16 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DriverActivity extends AppCompatActivity {
 
     //UI references
     private AlertDialog.Builder builder;
-    ListView l;
+    private List<Customer> customerList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private CustomerAdapter mAdapter;
 
     //Bottombar opens 1st id automatically, using flag to solve this
     int flag = 0;
@@ -99,13 +106,18 @@ public class DriverActivity extends AppCompatActivity {
         }
 
         //Set up customer list view
-        l = (ListView) findViewById(R.id.customer_list);
         final DBHome d = new DBHome(DriverActivity.this);
-        ArrayAdapter name = new ArrayAdapter(DriverActivity.this,android.R.layout.simple_list_item_1,d.getData().get("name"));
-        l.setAdapter(name);
-        l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mAdapter = new CustomerAdapter(customerList);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+            public void onClick(View view,final int position) {
                 builder.setMessage("Name: "+d.getData().get("name").get(position)
                         +"\nMobile: "+d.getData().get("number").get(position)
                         +"\nDays: "+d.getData().get("time").get(position)
@@ -126,8 +138,20 @@ public class DriverActivity extends AppCompatActivity {
                         })
                         .show();
             }
-        });
-        d.close();
+            @Override
+            public void onLongClick(View view, final int position) {
+
+            }
+        }));
+        for (int i=0;i<d.getProfilesCount();i++)
+        {
+            Customer customer = new Customer(d.getData().get("name").get(i),
+                    d.getData().get("number").get(i),
+                    d.getData().get("time").get(i),
+                    d.getData().get("slot").get(i));
+            customerList.add(customer);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

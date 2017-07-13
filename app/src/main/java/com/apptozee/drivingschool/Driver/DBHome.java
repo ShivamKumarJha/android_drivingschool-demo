@@ -42,6 +42,15 @@ public class DBHome extends SQLiteOpenHelper {
         return store;
     }
 
+    public int getProfilesCount() {
+        String countQuery = "SELECT  * FROM customer";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
+
     public void updateData(String s1, String s2, String s3, String s4)
     {
         SQLiteDatabase db = this.getWritableDatabase();
