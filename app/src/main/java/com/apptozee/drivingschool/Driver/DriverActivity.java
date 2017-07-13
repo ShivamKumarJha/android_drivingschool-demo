@@ -1,14 +1,14 @@
 package com.apptozee.drivingschool.Driver;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -29,10 +29,10 @@ public class DriverActivity extends AppCompatActivity {
 
     //UI references
     private AlertDialog.Builder builder;
-    private ListView l;
-    //Demo string. This needs to be fetched from database.
-    String[] customerlist = {"Customer 1","Customer 2","Customer 3","Customer 4",
-            "Customer 5","Customer 6","Customer 7","Customer 8"};
+    ListView l;
+
+    //Bottombar opens 1st id automatically, using flag to solve this
+    int flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,11 @@ public class DriverActivity extends AppCompatActivity {
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (tabId == R.id.sched) {
-                    //This will be the default page when drawer opens
-                    //code will be written later, probably ListView component
-                }
-                else if (tabId == R.id.reg) {
+                if (tabId == R.id.reg && flag == 1) {
                     // Call RegisterCustomer activity
                     Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
                     startActivity(i);
+                    flag = 1;
                 } else if (tabId == R.id.leave) {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
                     startActivity(i);
@@ -63,14 +60,11 @@ public class DriverActivity extends AppCompatActivity {
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
-                if (tabId == R.id.sched) {
-                    //This will be the default page when drawer opens
-                    //code will be written later, probably ListView component
-                }
-                else if (tabId == R.id.reg) {
+                if (tabId == R.id.reg) {
                     // Call RegisterCustomer activity
                     Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
                     startActivity(i);
+                    finish();
                 } else if (tabId == R.id.leave) {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
                     startActivity(i);
@@ -88,16 +82,34 @@ public class DriverActivity extends AppCompatActivity {
 
         //Set up customer list view
         l = (ListView) findViewById(R.id.customer_list);
-        ArrayAdapter adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, customerlist); //we will use own layout once ready
-        l.setAdapter(adapter);
+        final DBHome d = new DBHome(DriverActivity.this);
+        ArrayAdapter name = new ArrayAdapter(DriverActivity.this,android.R.layout.simple_list_item_1,d.getData().get("name"));
+        l.setAdapter(name);
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(DriverActivity.this,CustomerDetails.class);
-                startActivity(i);
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                builder.setMessage("Mobile: "+d.getData().get("number").get(position)
+                        +"\nName: "+d.getData().get("name").get(position)
+                        +"\nDuration: "+d.getData().get("time").get(position)
+                        +"\nSlot: "+d.getData().get("slot").get(position))
+                        .setPositiveButton("Call?", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                    ActivityCompat.requestPermissions(DriverActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
+                                }
+                                else if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+                                {
+                                    Intent i = new Intent();
+                                    i.setAction(Intent.ACTION_CALL);
+                                    i.setData(Uri.parse("tel:+91"+d.getData().get("number").get(position)));
+                                    startActivity(i);
+                                }
+                            }
+                        })
+                        .show();
             }
         });
+        d.close();
     }
 
     @Override

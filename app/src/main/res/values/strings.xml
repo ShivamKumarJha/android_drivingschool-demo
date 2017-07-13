@@ -18,9 +18,10 @@
     <string name="title_activity_driver">Driver</string>
 
     <!--Drawer String -->
-    <string name="register">Register Customer</string>
-    <string name="schedule">Schedule</string>
-    <string name="applyleave">Apply for leave</string>
+    <string name="registercus">Register</string>
+    <string name="updatecus">Update</string>
+    <string name="deletecus">Delete</string>
+    <string name="applyleave">Leave</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

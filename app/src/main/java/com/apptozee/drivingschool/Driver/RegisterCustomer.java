@@ -1,6 +1,7 @@
 package com.apptozee.drivingschool.Driver;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class RegisterCustomer extends AppCompatActivity {
         setContentView(R.layout.activity_register_customer);
 
         e1 = (EditText) findViewById(R.id.name);
-        e2 = (EditText) findViewById(R.id.pickup);
+        e2 = (EditText) findViewById(R.id.mobile);
         e3 = (EditText) findViewById(R.id.days);
         e4 = (EditText) findViewById(R.id.slot);
         b = (Button) findViewById(R.id.register);
@@ -41,6 +42,12 @@ public class RegisterCustomer extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(e4.getText().toString())){
                     e4.setError(getString(R.string.error_field_required));
                 }else {
+
+                    DBHome dbh = new DBHome(RegisterCustomer.this);
+                    dbh.insertData(e2.getText().toString(),
+                            e1.getText().toString(),
+                            e3.getText().toString(),e4.getText().toString());
+                    dbh.close();
 
                     //Hide Keyboard so Snackbar is visible
                     InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -59,5 +66,11 @@ public class RegisterCustomer extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(RegisterCustomer.this,DriverActivity.class);
+        startActivity(i);
     }
 }
