@@ -1,26 +1,27 @@
-<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@android:color/background_dark"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#5a7683"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <TextView
+        android:textSize="42sp"
+        android:textColor="#000b10"
+        android:text="Welcome to Driving School App!"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
-        android:id="@+id/splashscreen"
-
+        android:id="@+id/bg"
+        android:src="@drawable/car"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:layout_marginLeft="0dp"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ss1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

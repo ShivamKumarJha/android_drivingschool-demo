@@ -20,7 +20,7 @@ public class DBHome extends SQLiteOpenHelper {
         HashMap<String,ArrayList<String>> store=new HashMap<>();
         ArrayList <String> number= new ArrayList<>();
         ArrayList <String> name= new ArrayList<>();
-        ArrayList <String> time= new ArrayList<>(); //time as in duration
+        ArrayList <String> time= new ArrayList<>(); //time as in days of learning
         ArrayList <String> slot= new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String[] cols = {"number","name","time","slot"};

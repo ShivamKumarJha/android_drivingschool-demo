@@ -1,5 +1,6 @@
 package com.apptozee.drivingschool.Driver;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.apptozee.drivingschool.R;
 
@@ -18,8 +18,7 @@ import java.util.Calendar;
 public class DriverLeave extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     //UI references
-    private TextView t1,t2;
-    private EditText e1,e3;
+    private EditText e1,e2;
     private Button b;
     private DatePickerDialog dpd;
 
@@ -38,10 +37,8 @@ public class DriverLeave extends AppCompatActivity implements DatePickerDialog.O
         );
 
         // link UI components
-        t1 = (TextView) findViewById(R.id.ltaken);
-        t2 = (TextView) findViewById(R.id.lleft);
         e1 = (EditText) findViewById(R.id.lperiod);
-        e3 = (EditText) findViewById(R.id.lreason);
+        e2 = (EditText) findViewById(R.id.lreason);
         b = (Button) findViewById(R.id.apply);
 
         //date listener
@@ -60,8 +57,8 @@ public class DriverLeave extends AppCompatActivity implements DatePickerDialog.O
                 if (TextUtils.isEmpty(e1.getText().toString())){
                     e1.setError(getString(R.string.error_field_required));
                 }
-                else if (TextUtils.isEmpty(e3.getText().toString())){
-                    e3.setError(getString(R.string.error_field_required));
+                else if (TextUtils.isEmpty(e2.getText().toString())){
+                    e2.setError(getString(R.string.error_field_required));
                 }
                 else {
                     //Snackbar to let user process is done
@@ -84,5 +81,12 @@ public class DriverLeave extends AppCompatActivity implements DatePickerDialog.O
         //String datestart = dayOfMonth+"/"+(monthOfYear+1)+"/"+year;
         //String dateend = dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd;
         e1.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year+" to "+dayOfMonthEnd+"/"+(monthOfYearEnd+1)+"/"+yearEnd);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(DriverLeave.this,DriverActivity.class);
+        startActivity(i);
+        DriverLeave.this.finish();
     }
 }

@@ -50,10 +50,19 @@ public class DriverActivity extends AppCompatActivity {
                     // Call RegisterCustomer activity
                     Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
                     startActivity(i);
-                    flag = 1;
+                    finish();
                 } else if (tabId == R.id.leave) {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
                     startActivity(i);
+                    finish();
+                } else if (tabId == R.id.upd) {
+                    Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
+                    startActivity(i);
+                    finish();
+                } else if (tabId == R.id.del) {
+                    Intent i = new Intent(DriverActivity.this,DeleteCustomer.class);
+                    startActivity(i);
+                    finish();
                 }
             }
         });
@@ -68,6 +77,15 @@ public class DriverActivity extends AppCompatActivity {
                 } else if (tabId == R.id.leave) {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
                     startActivity(i);
+                    finish();
+                } else if (tabId == R.id.upd) {
+                    Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
+                    startActivity(i);
+                    finish();
+                } else if (tabId == R.id.del) {
+                    Intent i = new Intent(DriverActivity.this,DeleteCustomer.class);
+                    startActivity(i);
+                    finish();
                 }
             }
         });
@@ -88,9 +106,9 @@ public class DriverActivity extends AppCompatActivity {
         l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                builder.setMessage("Mobile: "+d.getData().get("number").get(position)
-                        +"\nName: "+d.getData().get("name").get(position)
-                        +"\nDuration: "+d.getData().get("time").get(position)
+                builder.setMessage("Name: "+d.getData().get("name").get(position)
+                        +"\nMobile: "+d.getData().get("number").get(position)
+                        +"\nDays: "+d.getData().get("time").get(position)
                         +"\nSlot: "+d.getData().get("slot").get(position))
                         .setPositiveButton("Call?", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

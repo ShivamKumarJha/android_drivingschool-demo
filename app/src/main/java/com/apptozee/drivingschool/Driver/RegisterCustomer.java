@@ -72,5 +72,6 @@ public class RegisterCustomer extends AppCompatActivity {
     public void onBackPressed() {
         Intent i = new Intent(RegisterCustomer.this,DriverActivity.class);
         startActivity(i);
+        RegisterCustomer.this.finish();
     }
 }
