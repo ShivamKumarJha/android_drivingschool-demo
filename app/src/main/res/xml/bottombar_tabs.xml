@@ -5,16 +5,6 @@
         title="@string/registercus"
         barColorWhenSelected="#a5f992" />
     <tab
-        id="@+id/upd"
-        icon="@android:drawable/ic_menu_edit"
-        title="@string/updatecus"
-        barColorWhenSelected="#ede7a5" />
-    <tab
-        id="@+id/del"
-        icon="@android:drawable/ic_menu_delete"
-        title="@string/deletecus"
-        barColorWhenSelected="#f19481" />
-    <tab
         id="@+id/leave"
         icon="@android:drawable/sym_action_email"
         title="@string/applyleave"

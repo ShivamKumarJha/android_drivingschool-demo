@@ -14,12 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.apptozee.drivingschool.LoginActivity;
 import com.apptozee.drivingschool.R;
@@ -62,14 +62,6 @@ public class DriverActivity extends AppCompatActivity {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
                     startActivity(i);
                     finish();
-                } else if (tabId == R.id.upd) {
-                    Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
-                    startActivity(i);
-                    finish();
-                } else if (tabId == R.id.del) {
-                    Intent i = new Intent(DriverActivity.this,DeleteCustomer.class);
-                    startActivity(i);
-                    finish();
                 }
             }
         });
@@ -83,14 +75,6 @@ public class DriverActivity extends AppCompatActivity {
                     finish();
                 } else if (tabId == R.id.leave) {
                     Intent i = new Intent(DriverActivity.this,DriverLeave.class);
-                    startActivity(i);
-                    finish();
-                } else if (tabId == R.id.upd) {
-                    Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
-                    startActivity(i);
-                    finish();
-                } else if (tabId == R.id.del) {
-                    Intent i = new Intent(DriverActivity.this,DeleteCustomer.class);
                     startActivity(i);
                     finish();
                 }
@@ -118,12 +102,15 @@ public class DriverActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view,final int position) {
-                builder.setMessage("Name: "+d.getData().get("name").get(position)
-                        +"\nMobile: "+d.getData().get("number").get(position)
-                        +"\nDays: "+d.getData().get("time").get(position)
-                        +"\nSlot: "+d.getData().get("slot").get(position))
-                        .setPositiveButton("Call?", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                PopupMenu popup = new PopupMenu(DriverActivity.this, view);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.options_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu1:
                                 if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                     ActivityCompat.requestPermissions(DriverActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
                                 }
@@ -134,9 +121,29 @@ public class DriverActivity extends AppCompatActivity {
                                     i.setData(Uri.parse("tel:+91"+d.getData().get("number").get(position)));
                                     startActivity(i);
                                 }
-                            }
-                        })
-                        .show();
+                                break;
+                            case R.id.menu2:
+                                Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
+                                //Send values to UpdateCustomer class
+                                i.putExtra("cname",d.getData().get("name").get(position));
+                                i.putExtra("cnumber",d.getData().get("number").get(position));
+                                i.putExtra("cdays",d.getData().get("time").get(position));
+                                i.putExtra("cslot",d.getData().get("slot").get(position));
+                                startActivity(i);
+                                finish();
+                                break;
+                            case R.id.menu3:
+                                Intent i2 = new Intent(DriverActivity.this,DeleteCustomer.class);
+                                i2.putExtra("cnumber",d.getData().get("number").get(position));
+                                startActivity(i2);
+                                finish();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
             }
             @Override
             public void onLongClick(View view, final int position) {

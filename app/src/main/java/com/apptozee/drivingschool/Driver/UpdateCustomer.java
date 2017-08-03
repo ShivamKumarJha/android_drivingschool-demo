@@ -30,6 +30,13 @@ public class UpdateCustomer extends AppCompatActivity {
         e4 = (EditText) findViewById(R.id.slot);
         b = (Button) findViewById(R.id.register);
 
+        //Get values from DriverActivity
+        Bundle bundle = getIntent().getExtras();
+        e1.setText(bundle.getString("cname"));
+        e2.setText(bundle.getString("cnumber"));
+        e3.setText(bundle.getString("cdays"));
+        e4.setText(bundle.getString("cslot"));
+
         b.setText("UPDATE");
 
         b.setOnClickListener(new View.OnClickListener() {

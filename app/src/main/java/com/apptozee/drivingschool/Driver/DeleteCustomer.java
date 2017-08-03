@@ -30,6 +30,10 @@ public class DeleteCustomer extends AppCompatActivity {
         e4 = (EditText) findViewById(R.id.slot);
         b = (Button) findViewById(R.id.register);
 
+        //Get values from DriverActivity
+        Bundle bundle = getIntent().getExtras();
+        e2.setText(bundle.getString("cnumber"));
+
         b.setText("DELETE");
         e1.setVisibility(View.GONE);
         e3.setVisibility(View.GONE);
