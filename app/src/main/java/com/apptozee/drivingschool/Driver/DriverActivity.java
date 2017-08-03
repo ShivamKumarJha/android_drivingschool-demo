@@ -102,52 +102,11 @@ public class DriverActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view,final int position) {
-                PopupMenu popup = new PopupMenu(DriverActivity.this, view);
-                //inflating menu from xml resource
-                popup.inflate(R.menu.options_menu);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu1:
-                                if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                                    ActivityCompat.requestPermissions(DriverActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
-                                }
-                                else if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
-                                {
-                                    Intent i = new Intent();
-                                    i.setAction(Intent.ACTION_CALL);
-                                    i.setData(Uri.parse("tel:+91"+d.getData().get("number").get(position)));
-                                    startActivity(i);
-                                }
-                                break;
-                            case R.id.menu2:
-                                Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
-                                //Send values to UpdateCustomer class
-                                i.putExtra("cname",d.getData().get("name").get(position));
-                                i.putExtra("cnumber",d.getData().get("number").get(position));
-                                i.putExtra("cdays",d.getData().get("time").get(position));
-                                i.putExtra("cslot",d.getData().get("slot").get(position));
-                                startActivity(i);
-                                finish();
-                                break;
-                            case R.id.menu3:
-                                Intent i2 = new Intent(DriverActivity.this,DeleteCustomer.class);
-                                i2.putExtra("cnumber",d.getData().get("number").get(position));
-                                startActivity(i2);
-                                finish();
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                //displaying the popup
-                popup.show();
+                popupmenu(view,position);
             }
             @Override
             public void onLongClick(View view, final int position) {
-
+                popupmenu(view,position);
             }
         }));
         for (int i=0;i<d.getProfilesCount();i++)
@@ -159,6 +118,53 @@ public class DriverActivity extends AppCompatActivity {
             customerList.add(customer);
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void popupmenu(View view, final int position)
+    {
+        final DBHome d = new DBHome(DriverActivity.this);
+        PopupMenu popup = new PopupMenu(DriverActivity.this, view);
+        //inflating menu from xml resource
+        popup.inflate(R.menu.options_menu);
+        //adding click listener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu1:
+                        if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(DriverActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
+                        }
+                        else if (ActivityCompat.checkSelfPermission(DriverActivity.this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+                        {
+                            Intent i = new Intent();
+                            i.setAction(Intent.ACTION_CALL);
+                            i.setData(Uri.parse("tel:+91"+d.getData().get("number").get(position)));
+                            startActivity(i);
+                        }
+                        break;
+                    case R.id.menu2:
+                        Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
+                        //Send values to UpdateCustomer class
+                        i.putExtra("cname",d.getData().get("name").get(position));
+                        i.putExtra("cnumber",d.getData().get("number").get(position));
+                        i.putExtra("cdays",d.getData().get("time").get(position));
+                        i.putExtra("cslot",d.getData().get("slot").get(position));
+                        startActivity(i);
+                        finish();
+                        break;
+                    case R.id.menu3:
+                        Intent i2 = new Intent(DriverActivity.this,DeleteCustomer.class);
+                        i2.putExtra("cnumber",d.getData().get("number").get(position));
+                        startActivity(i2);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
+        //displaying the popup
+        popup.show();
     }
 
     @Override
