@@ -56,6 +56,7 @@ public class DriverActivity extends AppCompatActivity {
                 if (tabId == R.id.reg && flag == 1) {
                     // Call RegisterCustomer activity
                     Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
+                    i.putExtra("update",0);
                     startActivity(i);
                     finish();
                 } else if (tabId == R.id.leave) {
@@ -71,6 +72,7 @@ public class DriverActivity extends AppCompatActivity {
                 if (tabId == R.id.reg) {
                     // Call RegisterCustomer activity
                     Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
+                    i.putExtra("update",0);
                     startActivity(i);
                     finish();
                 } else if (tabId == R.id.leave) {
@@ -144,8 +146,9 @@ public class DriverActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.menu2:
-                        Intent i = new Intent(DriverActivity.this,UpdateCustomer.class);
-                        //Send values to UpdateCustomer class
+                        Intent i = new Intent(DriverActivity.this,RegisterCustomer.class);
+                        //Send values to RegisterCustomer class
+                        i.putExtra("update",1);
                         i.putExtra("cname",d.getData().get("name").get(position));
                         i.putExtra("cnumber",d.getData().get("number").get(position));
                         i.putExtra("cdays",d.getData().get("time").get(position));

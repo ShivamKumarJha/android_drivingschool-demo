@@ -32,6 +32,17 @@ public class RegisterCustomer extends AppCompatActivity {
         e4 = (EditText) findViewById(R.id.slot);
         b = (Button) findViewById(R.id.register);
 
+        //Get values from DriverActivity
+        Bundle bundle = getIntent().getExtras();
+        final int flag = bundle.getInt("update"); // differentiates between update & register
+        if (flag == 1){
+            e1.setText(bundle.getString("cname"));
+            e2.setText(bundle.getString("cnumber"));
+            e3.setText(bundle.getString("cdays"));
+            e4.setText(bundle.getString("cslot"));
+            b.setText("UPDATE");
+        }
+
         e3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,27 +143,60 @@ public class RegisterCustomer extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(e4.getText().toString())){
                     e4.setError(getString(R.string.error_field_required));
                 }else {
+                    if (flag == 0) {
+                        DBHome dbh = new DBHome(RegisterCustomer.this);
+                        dbh.insertData(e2.getText().toString(),
+                                e1.getText().toString(),
+                                e3.getText().toString(),e4.getText().toString());
+                        dbh.close();
 
-                    DBHome dbh = new DBHome(RegisterCustomer.this);
-                    dbh.insertData(e2.getText().toString(),
-                            e1.getText().toString(),
-                            e3.getText().toString(),e4.getText().toString());
-                    dbh.close();
+                        //Hide Keyboard so Snackbar is visible
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                    //Hide Keyboard so Snackbar is visible
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        //Snackbar to let driver know customer is registered
+                        Snackbar snackbar = Snackbar
+                                .make(v, "Registered.", Snackbar.LENGTH_INDEFINITE)
+                                .setAction("FINISH!", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        onBackPressed(); // Don't come back to this activity on back press
+                                    }
+                                });
+                        snackbar.show();
+                    } else if (flag == 1) {
+                        DBHome dbh = new DBHome(RegisterCustomer.this);
+                        boolean res = dbh.verification(e2.getText().toString());
+                        if (res) {
+                            dbh.updateData(e2.getText().toString(),
+                                    e1.getText().toString(),
+                                    e3.getText().toString(),e4.getText().toString());
+                            dbh.close();
 
-                    //Snackbar to let driver know customer is registered
-                    Snackbar snackbar = Snackbar
-                            .make(v, "Registered.", Snackbar.LENGTH_INDEFINITE)
-                            .setAction("FINISH!", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    onBackPressed(); // Don't come back to this activity on back press
-                                }
-                            });
-                    snackbar.show();
+                            //Hide Keyboard so Snackbar is visible
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                            //Snackbar to let driver know customer details are updated
+                            Snackbar snackbar = Snackbar
+                                    .make(v, "UPDATED.", Snackbar.LENGTH_INDEFINITE)
+                                    .setAction("FINISH!", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            onBackPressed(); // Don't come back to this activity on back press
+                                        }
+                                    });
+                            snackbar.show();
+                        }
+                        else {
+                            //Snackbar to let driver know customer is not in records
+                            Snackbar snackbar = Snackbar
+                                    .make(v, "No matching record found.", Snackbar.LENGTH_INDEFINITE);
+                            snackbar.show();
+                        }
+                    }
+
+
                 }
             }
         });
