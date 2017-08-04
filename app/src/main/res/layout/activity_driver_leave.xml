@@ -8,6 +8,7 @@
 
     <EditText
         android:id="@+id/lperiod"
+        android:focusable="false"
         android:padding="10.0dp"
         android:gravity="center"
         android:hint="@string/lperiod"

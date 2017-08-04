@@ -38,4 +38,18 @@
     <string name="hrs_left">Hours left</string>
     <string name="hrs_done">Hours done</string>
     <string name="amount">Amount paid</string>
+
+    <!--SLOTS-->
+    <string name="slot1">6 AM - 7 AM</string>
+    <string name="slot2">7 AM - 8 AM</string>
+    <string name="slot3">8 AM - 9 AM</string>
+    <string name="slot4">9 AM - 10 AM</string>
+    <string name="slot5">10 AM - 11 AM</string>
+    <string name="slot6">11 AM - 12 PM</string>
+    <string name="slot7">12 PM - 1 PM</string>
+    <string name="slot8">1 PM - 2 PM</string>
+    <string name="slot9">2 PM - 3 PM</string>
+    <string name="slot10">3 PM - 4 PM</string>
+    <string name="slot11">4 PM - 5 PM</string>
+    <string name="slot12">5 PM - 6 PM</string>
 </resources>

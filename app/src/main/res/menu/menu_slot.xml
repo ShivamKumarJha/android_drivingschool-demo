@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cslot1"
+        android:title="@string/slot1" />
+
+    <item
+        android:id="@+id/cslot2"
+        android:title="@string/slot2" />
+
+    <item
+        android:id="@+id/cslot3"
+        android:title="@string/slot3" />
+
+    <item
+        android:id="@+id/cslot4"
+        android:title="@string/slot4" />
+
+    <item
+        android:id="@+id/cslot5"
+        android:title="@string/slot5" />
+
+    <item
+        android:id="@+id/cslot6"
+        android:title="@string/slot6" />
+
+    <item
+        android:id="@+id/cslot7"
+        android:title="@string/slot7" />
+
+    <item
+        android:id="@+id/cslot8"
+        android:title="@string/slot8" />
+
+    <item
+        android:id="@+id/cslot9"
+        android:title="@string/slot9" />
+
+    <item
+        android:id="@+id/cslot10"
+        android:title="@string/slot10" />
+
+    <item
+        android:id="@+id/cslot11"
+        android:title="@string/slot11" />
+
+    <item
+        android:id="@+id/cslot12"
+        android:title="@string/slot12" />
+
+</menu>
