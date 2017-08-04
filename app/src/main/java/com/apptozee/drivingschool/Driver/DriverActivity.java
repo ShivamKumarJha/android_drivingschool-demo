@@ -122,7 +122,7 @@ public class DriverActivity extends AppCompatActivity {
         }
     }
 
-    public void popupmenu(View view, final int position)
+    public void popupmenu(final View view, final int position)
     {
         final DBHome d = new DBHome(DriverActivity.this);
         PopupMenu popup = new PopupMenu(DriverActivity.this, view);
@@ -157,10 +157,25 @@ public class DriverActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.menu3:
-                        Intent i2 = new Intent(DriverActivity.this,DeleteCustomer.class);
-                        i2.putExtra("cnumber",d.getData().get("number").get(position));
-                        startActivity(i2);
-                        finish();
+                        builder.setMessage("Name: "+d.getData().get("name").get(position)
+                                +"\nMobile: "+d.getData().get("number").get(position)
+                                +"\nDays: "+d.getData().get("time").get(position)
+                                +"\nSlot: "+d.getData().get("slot").get(position))
+                                .setPositiveButton("DELETE?", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        DBHome dbh = new DBHome(DriverActivity.this);
+                                        dbh.deleteData(d.getData().get("number").get(position));
+                                        dbh.close();
+
+                                        // update recycler view
+                                        customerList.remove(position);
+                                        recyclerView.removeViewAt(position);
+                                        mAdapter.notifyItemRemoved(position);
+                                        mAdapter.notifyItemRangeChanged(position, customerList.size());
+                                        mAdapter.notifyDataSetChanged();
+                                    }
+                                })
+                                .show();
                         break;
                 }
                 return false;

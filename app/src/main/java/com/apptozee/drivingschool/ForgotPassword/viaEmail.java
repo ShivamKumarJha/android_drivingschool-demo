@@ -30,7 +30,7 @@ public class viaEmail extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         e = (EditText)findViewById(R.id.field);
-        b = (Button) findViewById(R.id.sumbit);
+        b = (Button) findViewById(R.id.submit);
 
         e.setHint(getString(R.string.email));
         e.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);

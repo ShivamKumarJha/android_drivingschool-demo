@@ -27,7 +27,7 @@ public class viaSMS extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         e = (EditText)findViewById(R.id.field);
-        b = (Button) findViewById(R.id.sumbit);
+        b = (Button) findViewById(R.id.submit);
 
         e.setHint(getString(R.string.mobile_number));
         e.setInputType(InputType.TYPE_CLASS_PHONE);

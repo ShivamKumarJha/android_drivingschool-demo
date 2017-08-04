@@ -46,6 +46,7 @@ public class RegisterCustomer extends AppCompatActivity {
         e3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hidekeyboard(v);
                 PopupMenu popup = new PopupMenu(RegisterCustomer.this, v);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.menu_days);
@@ -78,6 +79,7 @@ public class RegisterCustomer extends AppCompatActivity {
         e4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hidekeyboard(v);
                 PopupMenu popup = new PopupMenu(RegisterCustomer.this, v);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.menu_slot);
@@ -173,9 +175,7 @@ public class RegisterCustomer extends AppCompatActivity {
                                     e3.getText().toString(),e4.getText().toString());
                             dbh.close();
 
-                            //Hide Keyboard so Snackbar is visible
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            hidekeyboard(v);
 
                             //Snackbar to let driver know customer details are updated
                             Snackbar snackbar = Snackbar
@@ -200,6 +200,11 @@ public class RegisterCustomer extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void hidekeyboard(View v) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     @Override
