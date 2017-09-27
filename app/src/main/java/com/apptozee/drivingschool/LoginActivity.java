@@ -149,12 +149,12 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-            if (!isNetworkAvailable()) {
+            /*if (!isNetworkAvailable()) {
                 //Snackbar to let user know internet is unavailable
                 Snackbar snackbar = Snackbar
                         .make(ll, "No Internet connection.", Snackbar.LENGTH_LONG);
                 snackbar.show();
-            } else {
+            } else {*/
                 //disable login fields
                 mPasswordView.setFocusable(false);
                 mUsername.setFocusable(false);
@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements OnProgressBarLis
                         LoginActivity.this.finish();
                     }
                 }, 600);
-            }
+            //}
         }
     }
 
